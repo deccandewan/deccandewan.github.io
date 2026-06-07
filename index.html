@@ -269,14 +269,11 @@
 
     function diamond(x1,y1,x2,y2,x3,y3,x4,y4) {
         ctx.beginPath();
-        ctx.moveTo(x1,y1);
-        ctx.lineTo(x2,y2);
-        ctx.lineTo(x3,y3);
-        ctx.lineTo(x4,y4);
+        ctx.moveTo(x1,y1); ctx.lineTo(x2,y2);
+        ctx.lineTo(x3,y3); ctx.lineTo(x4,y4);
         ctx.closePath();
     }
 
-    // outer glow
     ctx.save();
     ctx.shadowColor = 'rgba(46,125,50,0.55)';
     ctx.shadowBlur = 14;
@@ -286,7 +283,6 @@
     ctx.stroke();
     ctx.restore();
 
-    // outer stroke
     ctx.strokeStyle = '#2E7D32';
     ctx.lineWidth = 1.5;
     diamond(cx,3, w-3,cy, cx,h-3, 3,cy);
@@ -294,7 +290,6 @@
 
     const r = w * 0.22;
 
-    // inner glow
     ctx.save();
     ctx.shadowColor = 'rgba(27,94,32,0.45)';
     ctx.shadowBlur = 8;
@@ -304,7 +299,6 @@
     ctx.stroke();
     ctx.restore();
 
-    // inner stroke
     ctx.strokeStyle = '#1B5E20';
     ctx.lineWidth = 1;
     diamond(cx,cy-r, cx+r,cy, cx,cy+r, cx-r,cy);
@@ -315,8 +309,8 @@
 (function() {
     const canvas = document.getElementById('bg');
     const ctx = canvas.getContext('2d');
-
     let W, H;
+
     function resize() {
         W = canvas.width  = window.innerWidth;
         H = canvas.height = window.innerHeight;
@@ -324,37 +318,7 @@
     resize();
     window.addEventListener('resize', resize);
 
-    // particle types: tiny drifting diamonds + slow radial pulse rings
-    const PARTICLE_COUNT = 38;
-    const particles = [];
-
     function rand(a, b) { return a + Math.random() * (b - a); }
-
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-        particles.push({
-            x: rand(0, 1),
-            y: rand(0, 1),
-            size: rand(5, 18),
-            speed: rand(0.00008, 0.00022),
-            drift: rand(-0.0003, 0.0003),
-            opacity: rand(0.15, 0.35),
-            opacitySpeed: rand(0.0005, 0.0012),
-            opacityDir: Math.random() > 0.5 ? 1 : -1,
-            opacityMin: rand(0.08, 0.15),
-            opacityMax: rand(0.28, 0.45),
-        });
-    }
-
-    // pulse rings
-    const rings = [];
-    for (let i = 0; i < 3; i++) {
-        rings.push({
-            r: rand(0, 1),       // 0-1 of min(W,H)/2
-            speed: rand(0.00015, 0.00035),
-            opacity: 0,
-        });
-        rings[i].r = i / 3;     // stagger
-    }
 
     function drawDiamond(ctx, x, y, s) {
         ctx.beginPath();
@@ -365,47 +329,95 @@
         ctx.closePath();
     }
 
+    // ── particles with sinusoidal drift ──
+    const particles = Array.from({length: 45}, () => ({
+        x:          rand(0, 1),
+        y:          rand(0, 1),
+        size:       rand(4, 16),
+        vy:         rand(0.00012, 0.00032),   // upward speed
+        phase:      rand(0, Math.PI * 2),      // sine phase
+        freq:       rand(0.008, 0.022),        // sine frequency
+        amp:        rand(0.006, 0.022),        // horizontal swing amplitude
+        opacity:    rand(0.12, 0.38),
+        opSpeed:    rand(0.008, 0.022),
+        opDir:      Math.random() > 0.5 ? 1 : -1,
+        opMin:      rand(0.05, 0.12),
+        opMax:      rand(0.25, 0.48),
+        twinkle:    Math.random() > 0.75,      // some particles flash
+        twinkleT:   rand(0, 100),
+    }));
+
+    // ── expanding diamond rings ──
+    const rings = [0, 0.33, 0.66].map(offset => ({
+        r: offset,
+        speed: rand(0.0006, 0.0011),
+    }));
+
     let t = 0;
+
     function frame() {
         ctx.clearRect(0, 0, W, H);
 
-        // radial glow at center
-        const grd = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, Math.min(W,H)*0.55);
-        grd.addColorStop(0, 'rgba(27,94,32,0.18)');
+        // slow-breathing large background diamond
+        const breathe = 0.5 + 0.5 * Math.sin(t * 0.003);
+        const bgSize  = Math.min(W, H) * (0.38 + 0.06 * breathe);
+        ctx.save();
+        ctx.strokeStyle = `rgba(46,125,50,${0.06 + 0.04 * breathe})`;
+        ctx.lineWidth = 1;
+        drawDiamond(ctx, W/2, H/2, bgSize);
+        ctx.stroke();
+        ctx.restore();
+
+        // central radial glow — pulses
+        const glowAlpha = 0.10 + 0.08 * breathe;
+        const grd = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, Math.min(W,H) * 0.5);
+        grd.addColorStop(0, `rgba(27,94,32,${glowAlpha})`);
         grd.addColorStop(1, 'rgba(10,20,10,0)');
         ctx.fillStyle = grd;
         ctx.fillRect(0, 0, W, H);
 
-        // expanding diamond rings from center
+        // expanding diamond rings
         for (const ring of rings) {
             ring.r += ring.speed;
             if (ring.r > 1) ring.r = 0;
-            const maxR = Math.min(W, H) * 0.48;
-            const rr = ring.r * maxR;
-            const fade = ring.r < 0.5 ? ring.r * 2 : (1 - ring.r) * 2;
+            const maxR = Math.min(W, H) * 0.52;
+            const rr   = ring.r * maxR;
+            const fade = ring.r < 0.4 ? ring.r / 0.4 : (1 - ring.r) / 0.6;
             ctx.save();
-            ctx.strokeStyle = `rgba(102,187,106,${0.22 * fade})`;
+            ctx.strokeStyle = `rgba(102,187,106,${0.28 * Math.max(0, fade)})`;
             ctx.lineWidth = 1.2;
             drawDiamond(ctx, W/2, H/2, rr);
             ctx.stroke();
             ctx.restore();
         }
 
-        // drifting diamond particles
+        // drifting particles
         for (const p of particles) {
-            p.y -= p.speed;
-            p.x += p.drift;
-            if (p.y < -0.05) { p.y = 1.05; p.x = rand(0, 1); }
-            if (p.x < -0.05) p.x = 1.05;
-            if (p.x > 1.05)  p.x = -0.05;
+            // sinusoidal horizontal drift
+            p.phase += p.freq;
+            p.y -= p.vy;
+            p.x += Math.sin(p.phase) * p.amp * 0.012;
 
-            p.opacity += p.opacitySpeed * p.opacityDir;
-            if (p.opacity >= p.opacityMax) { p.opacity = p.opacityMax; p.opacityDir = -1; }
-            if (p.opacity <= p.opacityMin) { p.opacity = p.opacityMin; p.opacityDir = 1; }
+            if (p.y < -0.06) { p.y = 1.06; p.x = rand(0.05, 0.95); }
+            if (p.x < -0.06) p.x = 1.06;
+            if (p.x >  1.06) p.x = -0.06;
+
+            // opacity breathe
+            p.opacity += p.opSpeed * p.opDir * 0.01;
+            if (p.opacity >= p.opMax) { p.opacity = p.opMax; p.opDir = -1; }
+            if (p.opacity <= p.opMin) { p.opacity = p.opMin; p.opDir =  1; }
+
+            // twinkle — occasional sharp flash
+            let op = p.opacity;
+            if (p.twinkle) {
+                p.twinkleT += rand(0.3, 1.2);
+                const flash = Math.pow(Math.max(0, Math.sin(p.twinkleT * 0.05)), 8);
+                op = Math.min(0.9, op + flash * 0.55);
+            }
 
             ctx.save();
-            ctx.strokeStyle = `rgba(102,187,106,${p.opacity})`;
-            ctx.lineWidth = 1.2;
+            ctx.strokeStyle = `rgba(129,199,132,${op})`;
+            ctx.lineWidth = 1.1;
             drawDiamond(ctx, p.x * W, p.y * H, p.size);
             ctx.stroke();
             ctx.restore();
