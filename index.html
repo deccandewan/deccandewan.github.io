@@ -115,7 +115,7 @@
             line-height: 1;
             filter: drop-shadow(0 2px 14px rgba(46,125,50,0.7));
             /* optical vertical center for Arabic */
-            padding-top: 6px;
+            margin-top: -8px;
         }
 
         /* breathing glow on ornament */
@@ -249,7 +249,7 @@
         <span class="pill">Bookmarks</span>
         <span class="pill">Surah / Juz</span>
         <span class="pill">Android</span>
-        <span class="pill">Open Source</span>
+        <span class="pill">Free</span>
     </div>
 
     <a href="https://github.com/deccandewan/khalafquran" rel="noopener" class="btn">
@@ -334,15 +334,14 @@
         particles.push({
             x: rand(0, 1),
             y: rand(0, 1),
-            size: rand(3, 11),
+            size: rand(5, 18),
             speed: rand(0.00008, 0.00022),
-            angle: rand(0, Math.PI * 2),
-            drift: rand(-0.0003, 0.0003),   // horizontal wander
-            opacity: rand(0.04, 0.13),
-            opacitySpeed: rand(0.0003, 0.0008),
+            drift: rand(-0.0003, 0.0003),
+            opacity: rand(0.15, 0.35),
+            opacitySpeed: rand(0.0005, 0.0012),
             opacityDir: Math.random() > 0.5 ? 1 : -1,
-            opacityMin: rand(0.02, 0.06),
-            opacityMax: rand(0.09, 0.18),
+            opacityMin: rand(0.08, 0.15),
+            opacityMax: rand(0.28, 0.45),
         });
     }
 
@@ -370,14 +369,14 @@
     function frame() {
         ctx.clearRect(0, 0, W, H);
 
-        // faint radial glow at center
+        // radial glow at center
         const grd = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, Math.min(W,H)*0.55);
-        grd.addColorStop(0, 'rgba(27,94,32,0.07)');
+        grd.addColorStop(0, 'rgba(27,94,32,0.18)');
         grd.addColorStop(1, 'rgba(10,20,10,0)');
         ctx.fillStyle = grd;
         ctx.fillRect(0, 0, W, H);
 
-        // pulse rings emanating from center
+        // expanding diamond rings from center
         for (const ring of rings) {
             ring.r += ring.speed;
             if (ring.r > 1) ring.r = 0;
@@ -385,11 +384,9 @@
             const rr = ring.r * maxR;
             const fade = ring.r < 0.5 ? ring.r * 2 : (1 - ring.r) * 2;
             ctx.save();
-            ctx.strokeStyle = `rgba(46,125,50,${0.06 * fade})`;
-            ctx.lineWidth = 1;
-            // draw as diamond ring
-            const s = rr;
-            drawDiamond(ctx, W/2, H/2, s);
+            ctx.strokeStyle = `rgba(102,187,106,${0.22 * fade})`;
+            ctx.lineWidth = 1.2;
+            drawDiamond(ctx, W/2, H/2, rr);
             ctx.stroke();
             ctx.restore();
         }
@@ -408,7 +405,7 @@
 
             ctx.save();
             ctx.strokeStyle = `rgba(102,187,106,${p.opacity})`;
-            ctx.lineWidth = 0.7;
+            ctx.lineWidth = 1.2;
             drawDiamond(ctx, p.x * W, p.y * H, p.size);
             ctx.stroke();
             ctx.restore();
