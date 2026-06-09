@@ -4,26 +4,80 @@
     <meta name="google-site-verification" content="81mz2h6ZHBT0SZ51XGukOw3JQU4UMUKBAqp56ITpnMI" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deccan Dewan — Khalaf Quran Android App</title>
-    <meta name="description" content="The official project homepage by Deccan Dewan. Download Khalaf Quran, a lightweight offline Qur'an reader app for the Riwayah of Khalaf ʿan Ḥamzah.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&family=DM+Mono:wght@400;500&family=Scheherazade+New:wght@400&family=Cinzel:wght@400;600&family=Amiri:wght@400&display=swap" rel="stylesheet">
-    
+
+    <!-- ═══════════════════════════════════════════════════════
+         PRIMARY SEO — Title & Description
+         Keep title under ~60 chars, description ~155 chars
+    ════════════════════════════════════════════════════════ -->
+    <title>Khalaf Quran App — Riwayah Khalaf ʿan Ḥamzah | Deccan Dewan</title>
+    <meta name="description" content="Free offline Android Qur'an reader for the Riwayah (Riwayat) of Khalaf ʿan Ḥamzah. Audio recitation, bookmarks, Surah & Juz navigation. Open-source by Deccan Dewan (Abu Hashim).">
+
+    <!-- Legacy keyword tag — still indexed by some search engines -->
+    <meta name="keywords" content="Khalaf Quran, Khalaf an Hamza, Khalaf an Hamzah, Riwayah Khalaf, Riwayat Khalaf, Riwayah Khalaf an Hamza, Riwayat Khalaf an Hamzah, Khalaf ibn Hisham, Hamzah recitation, Quranic recitation app, Quran Android app, offline Quran, Deccan Dewan, Abu Hashim, deccandewan github, qiraat app, qira'at khalaf, ten qira'at, ashr qira'at">
+    <meta name="author" content="Deccan Dewan (Abu Hashim)">
+    <meta name="robots" content="index, follow">
+
+    <!-- Canonical — replace with your actual deployed URL -->
+    <link rel="canonical" href="https://deccandewan.github.io/">
+
+    <!-- ═══════════════════════════════════════════════════════
+         OPEN GRAPH (Facebook, WhatsApp, LinkedIn previews)
+    ════════════════════════════════════════════════════════ -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://deccandewan.github.io/">
+    <meta property="og:title" content="Khalaf Quran App — Riwayah Khalaf ʿan Ḥamzah">
+    <meta property="og:description" content="Free offline Android Qur'an reader for the Riwayah of Khalaf ʿan Ḥamzah. Audio recitation, bookmarks, open-source by Deccan Dewan.">
+    <meta property="og:site_name" content="Deccan Dewan">
+    <!-- og:image — add a 1200×630 screenshot/banner if you have one:
+    <meta property="og:image" content="https://deccandewan.github.io/og-banner.png"> -->
+
+    <!-- ═══════════════════════════════════════════════════════
+         TWITTER / X CARD
+    ════════════════════════════════════════════════════════ -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Khalaf Quran App — Riwayah Khalaf ʿan Ḥamzah">
+    <meta name="twitter:description" content="Free offline Android Qur'an reader for the Riwayah of Khalaf ʿan Ḥamzah. Open-source by Deccan Dewan.">
+
+    <!-- ═══════════════════════════════════════════════════════
+         STRUCTURED DATA — Rich JSON-LD schema
+         Helps Google show rich results and understand the page
+    ════════════════════════════════════════════════════════ -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       "name": "Khalaf Quran",
+      "alternateName": ["Khalaf Quran App", "Riwayah Khalaf App", "Khalaf an Hamzah App"],
       "operatingSystem": "Android",
       "applicationCategory": "BooksApplication",
       "url": "https://deccandewan.github.io/",
+      "downloadUrl": "https://github.com/deccandewan/khalafquran",
+      "softwareVersion": "latest",
+      "price": "0",
+      "priceCurrency": "USD",
+      "description": "A lightweight, offline Qur'an reader Android app for the Riwayah (Riwayat) of Khalaf ʿan Ḥamzah — featuring audio recitation, bookmarks, Surah and Juz navigation. One of the rare qiraat apps dedicated to Khalaf an Hamza.",
+      "keywords": "Khalaf Quran, Khalaf an Hamza, Khalaf an Hamzah, Riwayah Khalaf, Riwayat Khalaf, Riwayah Khalaf an Hamza, Riwayat Khalaf an Hamzah, offline Quran app, Quran Android, qiraat app, Abu Hashim",
       "author": {
+        "@type": "Person",
+        "name": "Abu Hashim",
+        "alternateName": "Deccan Dewan",
+        "url": "https://github.com/deccandewan"
+      },
+      "publisher": {
         "@type": "Organization",
         "name": "Deccan Dewan",
         "url": "https://deccandewan.github.io/"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
       }
     }
     </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&family=DM+Mono:wght@400;500&family=Scheherazade+New:wght@400&family=Cinzel:wght@400;600&family=Amiri:wght@400&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -46,6 +100,7 @@
             color: var(--text);
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 32px 20px;
@@ -131,11 +186,9 @@
             color: #81C784;
             line-height: 1;
             filter: drop-shadow(0 2px 14px rgba(46,125,50,0.7));
-            /* optical vertical center for Arabic */
             margin-top: -8px;
         }
 
-        /* breathing glow on ornament */
         .ornament::after {
             content: '';
             position: absolute;
@@ -159,9 +212,10 @@
             margin-bottom: 4px;
         }
 
-        .riwayah {
+        h2.riwayah {
             font-family: 'Amiri', serif;
             font-size: 13px;
+            font-weight: 400;
             letter-spacing: 0.06em;
             font-style: italic;
             color: var(--green-mid);
@@ -174,7 +228,7 @@
             color: #8FAE8F;
             margin-bottom: 24px;
         }
-        
+
         p strong {
             color: var(--green-label);
             font-weight: 600;
@@ -246,43 +300,96 @@
         }
 
         .footer a:hover { color: var(--green-label); }
+
+        /* ── SEO content block — visible to crawlers, subtle to users ── */
+        .seo-block {
+            position: relative;
+            z-index: 1;
+            max-width: 400px;
+            width: 100%;
+            margin-top: 18px;
+            padding: 0 4px;
+            font-family: 'DM Mono', monospace;
+            font-size: 9.5px;
+            line-height: 1.7;
+            color: var(--muted);
+            text-align: center;
+            opacity: 0.45;
+        }
+
+        .seo-block a {
+            color: var(--muted);
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
 
 <canvas id="bg"></canvas>
 
-<div class="card">
+<!-- Main card -->
+<div class="card" role="main">
 
-    <div class="ornament">
+    <div class="ornament" aria-hidden="true">
         <canvas id="diamond" width="100" height="100"></canvas>
         <div class="khaaf"><span>خ</span></div>
     </div>
 
-    <h1>Khalaf Quran</h1>
-    <div class="riwayah">Riwayat Khalaf ʿan Ḥamzah</div>
+    <!-- h1 contains primary keyword -->
+    <h1>Khalaf Quran App</h1>
 
-    <p>An open-source digital project by <strong>Deccan Dewan</strong>. A lightweight, offline Qur'an reader for the recitation of Khalaf ʿan Ḥamzah — featuring audio, bookmarks, and seamless navigation.</p>
+    <!-- h2 contains secondary keyword phrase — styled to look like the subtitle -->
+    <h2 class="riwayah">Riwayah Khalaf ʿan Ḥamzah · Riwayat Khalaf ʿan Ḥamzah</h2>
 
-    <div class="pills">
+    <p>
+        An open-source digital project by <strong>Deccan Dewan</strong> (Abu Hashim).
+        A lightweight, offline Qur'an reader for the recitation of Khalaf ʿan Ḥamzah —
+        one of the rare qiraat apps dedicated to this riwayah — featuring audio, bookmarks,
+        and seamless Surah &amp; Juz navigation.
+    </p>
+
+    <div class="pills" aria-label="Features">
         <span class="pill">Offline PDF</span>
         <span class="pill">Audio Recitation</span>
         <span class="pill">Bookmarks</span>
         <span class="pill">Surah / Juz</span>
         <span class="pill">Android</span>
-        <span class="pill">Free</span>
+        <span class="pill">Free &amp; Open-Source</span>
     </div>
 
-    <a href="https://github.com/deccandewan/khalafquran" rel="noopener" class="btn">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+    <a href="https://github.com/deccandewan/khalafquran"
+       rel="noopener"
+       class="btn"
+       aria-label="View Khalaf Quran on GitHub and download APK">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+        </svg>
         View on GitHub &amp; Download APK
     </a>
 
-    <div class="footer">by <a href="https://github.com/deccandewan">Deccan Dewan</a></div>
+    <div class="footer">
+        by <a href="https://github.com/deccandewan" rel="author">Deccan Dewan</a>
+        &nbsp;·&nbsp;
+        <a href="https://github.com/deccandewan/khalafquran" rel="noopener">khalafquran on GitHub</a>
+    </div>
+
 </div>
 
+<!-- 
+    SEO anchor block — rendered in DOM, readable by crawlers.
+    Uses natural language so it reads as a genuine description, not keyword stuffing.
+    Font-size and opacity keep it visually unobtrusive for users.
+-->
+<aside class="seo-block" aria-label="About this project">
+    Khalaf Quran is a free Android app for Riwayah Khalaf ʿan Ḥamzah (also spelled
+    Riwayat Khalaf an Hamzah). Built by <a href="https://github.com/deccandewan">Deccan Dewan</a> (Abu Hashim).
+    Search terms: khalaf quran app · khalaf an hamza · khalaf an hamzah · riwayah khalaf ·
+    riwayat khalaf · riwayah khalaf an hamzah · offline quran android · qiraat khalaf ·
+    deccan dewan github · abu hashim quran app.
+</aside>
+
 <script>
-// ── Draw splash diamond (matches _DiamondPainter exactly) ──────────────────
+// ── Draw splash diamond ────────────────────────────────────────────────────
 (function() {
     const c = document.getElementById('diamond');
     const ctx = c.getContext('2d');
@@ -389,7 +496,6 @@
         const base = Math.min(W, H);
         const breathe = 0.5 + 0.5 * Math.sin(t * 0.003);
 
-        // deep radial glow
         const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, base*0.65);
         grd.addColorStop(0,   `rgba(27,94,32,${0.18 + 0.10*breathe})`);
         grd.addColorStop(0.5, `rgba(15,55,15,${0.07 + 0.04*breathe})`);
@@ -397,7 +503,6 @@
         ctx.fillStyle = grd;
         ctx.fillRect(0, 0, W, H);
 
-        // outermost bg diamond — prominent, glowing
         const d1 = base * (0.46 + 0.04*breathe);
         ctx.save();
         ctx.shadowColor = 'rgba(46,125,50,0.5)';
@@ -409,7 +514,6 @@
         ctx.restore();
         dotAt(cx, cy, d1, 0.45 + 0.2*breathe);
 
-        // second concentric — dashed
         const d2 = base * (0.30 + 0.02*breathe);
         ctx.save();
         ctx.setLineDash([7, 9]);
@@ -421,7 +525,6 @@
         ctx.restore();
         dotAt(cx, cy, d2, 0.28 + 0.12*breathe);
 
-        // third innermost bg diamond
         const d3 = base * (0.16 + 0.015*breathe);
         ctx.save();
         ctx.strokeStyle = `rgba(129,199,132,${0.15 + 0.08*breathe})`;
@@ -430,7 +533,6 @@
         ctx.stroke();
         ctx.restore();
 
-        // expanding rings
         for (const ring of rings) {
             ring.r += ring.speed;
             if (ring.r > 1) ring.r = 0;
@@ -444,7 +546,6 @@
             ctx.restore();
         }
 
-        // drifting particles
         for (const p of particles) {
             p.phase += p.freq;
             p.y -= p.vy;
