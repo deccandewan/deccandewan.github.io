@@ -78,6 +78,8 @@
 
         html {
             min-height: 100%;
+            /* explicit scroll on Android Chrome */
+            overflow-y: auto;
         }
 
         body {
@@ -88,9 +90,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            /* don't use justify-content:center — Android Chrome flex containers
+               won't scroll when content overflows that way */
             padding: 32px 16px;
-            /* removed overflow:hidden — was clipping card on short/narrow viewports */
+            overflow-y: auto;
         }
 
         #bg {
@@ -103,6 +106,7 @@
         .card {
             position: relative;
             z-index: 1;
+            margin: auto; /* vertically centres when viewport is tall */
             background: rgba(22, 28, 22, 0.82);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
