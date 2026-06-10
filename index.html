@@ -76,6 +76,10 @@
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+        html {
+            min-height: 100%;
+        }
+
         body {
             font-family: 'Spectral', Georgia, serif;
             background-color: var(--bg-deep);
@@ -85,14 +89,15 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 32px 20px;
-            overflow: hidden;
+            padding: 32px 16px;
+            /* removed overflow:hidden — was clipping card on short/narrow viewports */
         }
 
         #bg {
             position: fixed;
             inset: 0;
             z-index: 0;
+            pointer-events: none;
         }
 
         .card {
@@ -103,7 +108,8 @@
             -webkit-backdrop-filter: blur(18px);
             border: 1px solid var(--border);
             border-radius: 24px;
-            padding: 44px 36px 36px;
+            /* tighter horizontal padding on mobile */
+            padding: 40px 24px 32px;
             max-width: 400px;
             width: 100%;
             text-align: center;
@@ -112,6 +118,15 @@
                 0 24px 56px rgba(0,0,0,0.6),
                 0 0 100px rgba(27,94,32,0.12);
             animation: rise 0.7s cubic-bezier(0.16,1,0.3,1) both;
+        }
+
+        @media (min-width: 480px) {
+            .card {
+                padding: 44px 36px 36px;
+            }
+            body {
+                padding: 32px 20px;
+            }
         }
 
         @keyframes rise {
@@ -237,7 +252,9 @@
             justify-content: center;
             gap: 9px;
             width: 100%;
-            padding: 14px 20px;
+            /* ensure it never overflows its container */
+            min-width: 0;
+            padding: 14px 16px;
             background: linear-gradient(145deg, #1E6621, #164B18);
             color: var(--green-light);
             text-decoration: none;
@@ -248,6 +265,10 @@
             border: 1px solid rgba(102,187,106,0.22);
             box-shadow: 0 4px 16px rgba(0,0,0,0.35), inset 0 1px 0 rgba(129,199,132,0.10);
             transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+            /* prevent text overflow on very narrow screens */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .btn:hover {
