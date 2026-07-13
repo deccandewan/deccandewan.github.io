@@ -78,7 +78,6 @@
 
         html {
             min-height: 100%;
-            /* explicit scroll on Android Chrome */
             overflow-y: auto;
         }
 
@@ -90,8 +89,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            /* don't use justify-content:center — Android Chrome flex containers
-               won't scroll when content overflows that way */
             padding: 32px 16px;
             overflow-y: auto;
         }
@@ -106,13 +103,12 @@
         .card {
             position: relative;
             z-index: 1;
-            margin: auto; /* vertically centres when viewport is tall */
+            margin: auto;
             background: rgba(22, 28, 22, 0.82);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
             border: 1px solid var(--border);
             border-radius: 24px;
-            /* tighter horizontal padding on mobile */
             padding: 40px 24px 32px;
             max-width: 400px;
             width: 100%;
@@ -256,7 +252,6 @@
             justify-content: center;
             gap: 9px;
             width: 100%;
-            /* ensure it never overflows its container */
             min-width: 0;
             padding: 14px 16px;
             background: linear-gradient(145deg, #1E6621, #164B18);
@@ -269,10 +264,10 @@
             border: 1px solid rgba(102,187,106,0.22);
             box-shadow: 0 4px 16px rgba(0,0,0,0.35), inset 0 1px 0 rgba(129,199,132,0.10);
             transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
-            /* prevent text overflow on very narrow screens */
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            cursor: pointer;
         }
 
         .btn:hover {
@@ -284,6 +279,19 @@
         .btn:active { transform: translateY(0); }
 
         .btn svg { width: 15px; height: 15px; flex-shrink: 0; opacity: 0.8; }
+
+        .btn.btn-ghost {
+            background: transparent;
+            color: var(--green-label);
+            box-shadow: none;
+            border: 1px solid rgba(102,187,106,0.30);
+            margin-top: 10px;
+        }
+
+        .btn.btn-ghost:hover {
+            background: rgba(102,187,106,0.08);
+            box-shadow: 0 0 20px rgba(102,187,106,0.10);
+        }
 
         .footer {
             margin-top: 18px;
@@ -302,7 +310,193 @@
 
         .footer a:hover { color: var(--green-label); }
 
+        /* ---------------------------------------------------------- */
+        /* App Preview modal                                          */
+        /* ---------------------------------------------------------- */
 
+        .preview-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 20;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 16px;
+            background: rgba(6, 12, 6, 0.86);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .preview-overlay.open {
+            display: flex;
+            animation: overlay-in 0.25s ease-out both;
+        }
+
+        @keyframes overlay-in {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        .preview-panel {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 360px;
+            width: 100%;
+            animation: panel-in 0.35s cubic-bezier(0.16,1,0.3,1) both;
+        }
+
+        @keyframes panel-in {
+            from { opacity: 0; transform: translateY(16px) scale(0.96); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .preview-close {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            z-index: 2;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 1px solid rgba(102,187,106,0.25);
+            background: rgba(22,28,22,0.9);
+            color: var(--green-label);
+            font-family: 'DM Mono', monospace;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s;
+        }
+
+        .preview-close:hover {
+            background: rgba(46,125,50,0.35);
+            transform: rotate(90deg);
+        }
+
+        .phone {
+            position: relative;
+            width: 240px;
+            aspect-ratio: 9 / 19.5;
+            border-radius: 34px;
+            padding: 10px;
+            background: linear-gradient(160deg, #1c241c, #0d130d);
+            border: 1px solid rgba(102,187,106,0.20);
+            box-shadow:
+                0 0 0 1px rgba(0,0,0,0.6),
+                0 30px 60px rgba(0,0,0,0.65),
+                0 0 60px rgba(27,94,32,0.18);
+        }
+
+        .phone::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 16px;
+            background: #0d130d;
+            border-radius: 0 0 12px 12px;
+            z-index: 3;
+        }
+
+        .phone-screen {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 24px;
+            overflow: hidden;
+            background: #060906;
+        }
+
+        .phone-screen img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+
+        .phone-screen img.active {
+            opacity: 1;
+        }
+
+        .preview-caption {
+            margin-top: 18px;
+            margin-bottom: 4px;
+            font-family: 'DM Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 0.04em;
+            color: var(--green-label);
+            text-align: center;
+            min-height: 16px;
+        }
+
+        .preview-subcaption {
+            font-size: 12px;
+            color: var(--muted);
+            margin-bottom: 18px;
+            text-align: center;
+        }
+
+        .preview-nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .preview-arrow {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid rgba(102,187,106,0.25);
+            background: rgba(27,94,32,0.15);
+            color: var(--green-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s;
+            flex-shrink: 0;
+        }
+
+        .preview-arrow:hover {
+            background: rgba(46,125,50,0.35);
+        }
+
+        .preview-arrow:active { transform: scale(0.94); }
+
+        .preview-arrow svg { width: 16px; height: 16px; }
+
+        .preview-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .preview-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(129,199,132,0.25);
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .preview-dot.active {
+            background: var(--green-label);
+            transform: scale(1.3);
+        }
+
+        @media (max-width: 380px) {
+            .phone { width: 200px; }
+        }
     </style>
 </head>
 <body>
@@ -345,6 +539,18 @@
         View on GitHub &amp; Download APK
     </a>
 
+    <button type="button"
+            class="btn btn-ghost"
+            id="previewTrigger"
+            aria-haspopup="dialog"
+            aria-controls="previewOverlay">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <rect x="6.5" y="2.5" width="11" height="19" rx="2.4"/>
+            <line x1="10.2" y1="18.4" x2="13.8" y2="18.4" stroke-linecap="round"/>
+        </svg>
+        Preview the App
+    </button>
+
     <div class="footer">
         by <a href="https://github.com/deccandewan" rel="author">Deccan Dewan</a>
         &nbsp;·&nbsp;
@@ -353,7 +559,31 @@
 
 </div>
 
+<!-- App Preview modal -->
+<div class="preview-overlay" id="previewOverlay" role="dialog" aria-modal="true" aria-label="Khalaf Quran app preview">
+    <div class="preview-panel">
+        <button type="button" class="preview-close" id="previewClose" aria-label="Close preview">&times;</button>
 
+        <div class="phone">
+            <div class="phone-screen" id="phoneScreen">
+                <!-- images injected by script -->
+            </div>
+        </div>
+
+        <div class="preview-caption" id="previewCaption"></div>
+        <div class="preview-subcaption" id="previewSubcaption"></div>
+
+        <div class="preview-nav">
+            <div class="preview-arrow" id="previewPrev" aria-label="Previous screenshot">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </div>
+            <div class="preview-dots" id="previewDots"></div>
+            <div class="preview-arrow" id="previewNext" aria-label="Next screenshot">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
 (function() {
@@ -541,6 +771,103 @@
         requestAnimationFrame(frame);
     }
     frame();
+})();
+
+/* ---------------------------------------------------------- */
+/* App Preview carousel                                        */
+/* ---------------------------------------------------------- */
+(function() {
+    // Update the "src" paths below if your screenshots live somewhere else,
+    // e.g. "assets/screenshots/intro.png". Keep the files in the repo
+    // alongside this page (or adjust the folder name to match).
+    const slides = [
+        { src: 'screenshots/intro.png',      title: 'Launch',        sub: 'Riwayat Khalaf ʿan Ḥamzah' },
+        { src: 'screenshots/home.png',       title: 'Surah List',    sub: 'Browse by Surah, Juz, or Hizb' },
+        { src: 'screenshots/reading.png',    title: 'Reading View',  sub: 'Khalaf ʿan Ḥamzah mushaf, page 312' },
+        { src: 'screenshots/audio.png',      title: 'Audio Player',  sub: 'Recitation by Abd Al-Rashid Sufi' },
+        { src: 'screenshots/bookmarks.png',  title: 'Bookmarks',     sub: 'Saved pages with personal notes' },
+        { src: 'screenshots/streak.png',     title: 'Reading Streak',sub: 'Daily goal & total time tracking' },
+        { src: 'screenshots/settings1.png',  title: 'Settings',      sub: 'Language & reading goals' },
+        { src: 'screenshots/settings2.png',  title: 'Reminders',     sub: 'Scheduled daily notifications' },
+    ];
+
+    const overlay    = document.getElementById('previewOverlay');
+    const trigger    = document.getElementById('previewTrigger');
+    const closeBtn   = document.getElementById('previewClose');
+    const screen     = document.getElementById('phoneScreen');
+    const caption    = document.getElementById('previewCaption');
+    const subcaption = document.getElementById('previewSubcaption');
+    const dotsWrap   = document.getElementById('previewDots');
+    const prevBtn    = document.getElementById('previewPrev');
+    const nextBtn    = document.getElementById('previewNext');
+
+    let index = 0;
+    let built = false;
+
+    function build() {
+        slides.forEach((s, i) => {
+            const img = document.createElement('img');
+            img.src = s.src;
+            img.alt = s.title;
+            if (i === 0) img.classList.add('active');
+            screen.appendChild(img);
+
+            const dot = document.createElement('div');
+            dot.className = 'preview-dot' + (i === 0 ? ' active' : '');
+            dot.addEventListener('click', () => show(i));
+            dotsWrap.appendChild(dot);
+        });
+        built = true;
+    }
+
+    function show(i) {
+        index = (i + slides.length) % slides.length;
+        screen.querySelectorAll('img').forEach((img, n) => {
+            img.classList.toggle('active', n === index);
+        });
+        dotsWrap.querySelectorAll('.preview-dot').forEach((d, n) => {
+            d.classList.toggle('active', n === index);
+        });
+        caption.textContent = slides[index].title;
+        subcaption.textContent = slides[index].sub;
+    }
+
+    function open() {
+        if (!built) build();
+        show(index);
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function close() {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    trigger.addEventListener('click', open);
+    closeBtn.addEventListener('click', close);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+
+    prevBtn.addEventListener('click', () => show(index - 1));
+    nextBtn.addEventListener('click', () => show(index + 1));
+
+    document.addEventListener('keydown', (e) => {
+        if (!overlay.classList.contains('open')) return;
+        if (e.key === 'Escape')     close();
+        if (e.key === 'ArrowLeft')  show(index - 1);
+        if (e.key === 'ArrowRight') show(index + 1);
+    });
+
+    // touch swipe
+    let touchX = null;
+    screen.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; });
+    screen.addEventListener('touchend', (e) => {
+        if (touchX === null) return;
+        const dx = e.changedTouches[0].clientX - touchX;
+        if (dx > 40) show(index - 1);
+        if (dx < -40) show(index + 1);
+        touchX = null;
+    });
 })();
 </script>
 
