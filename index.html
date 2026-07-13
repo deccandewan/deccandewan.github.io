@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Khalaf Quran App — Riwayah Khalaf ʿan Ḥamzah for Android, Windows &amp; Linux | Deccan Dewan</title>
-    <meta name="description" content="Free offline Qur'an reader for the Riwayah (Riwayat) of Khalaf ʿan Hamzah, available on Android, Windows, and Linux (AppImage). Audio recitation, bookmarks, Surah & Juz navigation. By Deccan Dewan.">
+    <meta name="description" content="Download the Khalaf Quran APK — a free offline Qur'an reader for the Riwayah (Riwayat) of Khalaf ʿan Hamzah, available on Android, Windows, and Linux (AppImage). Audio recitation, bookmarks, Surah & Juz navigation. By Deccan Dewan.">
     <meta name="keywords" content="Khalaf Quran, Khalaf an Hamza, Khalaf an Hamzah, Riwayah Khalaf, Riwayat Khalaf, Riwayah Khalaf an Hamza, Riwayat Khalaf an Hamzah, Khalaf ibn Hisham, Hamzah recitation, Quranic recitation app, Quran Android app, Quran Windows app, Quran Linux app, Quran AppImage, offline Quran, Deccan Dewan, Abu Hashim, deccandewan github, qiraat app, qira'at khalaf, ten qira'at, ashr qira'at, Windows Application, Linux, Linux AppImage, cross platform Quran app">
     <meta name="author" content="Deccan Dewan">
     <meta name="robots" content="index, follow">
@@ -55,6 +55,55 @@
         "price": "0",
         "priceCurrency": "USD"
       }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the Khalaf Quran APK?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Khalaf Quran is a free, offline Qur'an reader APK built specifically for the Riwayah (Riwayat) of Khalaf ʿan Ḥamzah, one of the ten canonical qiraat. It includes audio recitation, bookmarks, and Surah/Juz navigation, and runs on Android, Windows, and Linux."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Riwayah Khalaf ʿan Ḥamzah?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Khalaf ʿan Ḥamzah is one of the recognized narrations (riwayat) of Qur'an recitation within the canonical ten qiraat system, transmitted through Khalaf ibn Hisham from the reciter Hamzah al-Zayyat. It is less common globally than Hafs ʿan Asim or Warsh ʿan Nafi, and is studied mainly in advanced tajwid and qiraat programs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the Khalaf Quran app free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Khalaf Quran is completely free and open source, with no in-app purchases or ads. It is developed and maintained by Deccan Dewan (Abu Hashim)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which platforms does Khalaf Quran support?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Khalaf Quran is available for Android (APK), Windows, and Linux (AppImage). All versions can be downloaded free from the project's GitHub repository."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I install the Khalaf Quran APK on Android?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Download the APK file from the GitHub releases page, allow installs from unknown sources if prompted by your device, then open the downloaded file to install. No Play Store account is required."
+          }
+        }
+      ]
     }
     </script>
 
@@ -311,6 +360,80 @@
         .footer a:hover { color: var(--green-label); }
 
         /* ---------------------------------------------------------- */
+        /* Info / FAQ section                                         */
+        /* ---------------------------------------------------------- */
+
+        .info {
+            position: relative;
+            z-index: 1;
+            max-width: 560px;
+            width: 100%;
+            margin: 28px auto 0;
+            padding: 0 4px;
+        }
+
+        .info h3 {
+            font-size: 12px;
+            font-family: 'DM Mono', monospace;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--green-label);
+            margin: 30px 0 14px;
+            text-align: center;
+        }
+
+        .info h3:first-child { margin-top: 0; }
+
+        .faq-item {
+            background: rgba(22, 28, 22, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px 18px;
+            margin-bottom: 10px;
+        }
+
+        .faq-item h4 {
+            font-size: 14.5px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .faq-item p {
+            font-size: 13.5px;
+            line-height: 1.6;
+            color: #8FAE8F;
+            margin-bottom: 0;
+        }
+
+        .changelog {
+            background: rgba(22, 28, 22, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px 18px;
+            font-size: 13px;
+            color: #8FAE8F;
+        }
+
+        .changelog ul {
+            list-style: none;
+            margin-top: 6px;
+        }
+
+        .changelog li {
+            padding: 6px 0;
+            border-top: 1px dashed var(--border);
+        }
+
+        .changelog li:first-child { border-top: none; }
+
+        .changelog .ver {
+            font-family: 'DM Mono', monospace;
+            color: var(--green-label);
+            margin-right: 8px;
+        }
+
+        /* ---------------------------------------------------------- */
         /* App Preview modal                                          */
         /* ---------------------------------------------------------- */
 
@@ -514,7 +637,7 @@
     <h2 class="riwayah">Riwayah Khalaf ʿan Ḥamzah · Riwayat Khalaf ʿan Ḥamzah</h2>
 
     <p>
-        A digital project by <strong>Deccan Dewan</strong> (Abu Hashim).
+        Download the <strong>Khalaf Quran APK</strong>, a digital project by <strong>Deccan Dewan</strong> (Abu Hashim).
         A lightweight, offline Qur'an reader for the recitation of Khalaf ʿan Ḥamzah —
         available on <strong>Android, Windows, and Linux</strong> —
         one of the rare qiraat apps dedicated to this riwayah — featuring audio, bookmarks,
@@ -539,7 +662,7 @@
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
         </svg>
-        View on GitHub &amp; Download
+        View on GitHub &amp; Download 
     </a>
 
     <button type="button"
@@ -561,6 +684,52 @@
     </div>
 
 </div>
+
+<section class="info" aria-label="About Khalaf Quran, FAQ, and changelog">
+
+    <h3>About Riwayah Khalaf ʿan Ḥamzah</h3>
+    <div class="faq-item">
+        <p>
+            Khalaf ʿan Ḥamzah (خلف عن حمزة) is one of the recognized riwayat (narrations)
+            of Qur'an recitation within the canonical ten qiraat system, transmitted through
+            Khalaf ibn Hisham from the reciter Ḥamzah al-Zayyat. It is less widespread globally
+            than Ḥafs ʿan ʿAsim or Warsh ʿan Nafi, and is mostly studied in advanced tajwid and
+            qiraat programs. The Khalaf Quran app was built to give this riwayah a dedicated,
+            offline-friendly home on Android, Windows, and Linux.
+        </p>
+    </div>
+
+    <h3>Frequently Asked Questions</h3>
+
+    <div class="faq-item">
+        <h4>What is the Khalaf Quran APK?</h4>
+        <p>A free, offline Qur'an reader APK built specifically for the Riwayah of Khalaf ʿan Ḥamzah, with audio recitation, bookmarks, and Surah/Juz navigation.</p>
+    </div>
+
+    <div class="faq-item">
+        <h4>Is it free?</h4>
+        <p>Yes — Khalaf Quran is free and open source, with no ads or in-app purchases.</p>
+    </div>
+
+    <div class="faq-item">
+        <h4>Which platforms are supported?</h4>
+        <p>Android (APK), Windows, and Linux (AppImage). All builds are available from the GitHub releases page.</p>
+    </div>
+
+    <div class="faq-item">
+        <h4>How do I install the APK on Android?</h4>
+        <p>Download the APK from GitHub, allow installs from unknown sources if your device asks, then open the file to install. No Play Store account needed.</p>
+    </div>
+
+    <h3>Changelog</h3>
+    <div class="changelog">
+        <ul>
+            <li><span class="ver">Latest</span>Added Windows and Linux (AppImage) builds alongside the existing Android APK.</li>
+            <li><span class="ver">Core</span>Offline reading, audio recitation, bookmarks, Surah &amp; Juz navigation for Riwayah Khalaf ʿan Ḥamzah.</li>
+        </ul>
+    </div>
+
+</section>
 
 <!-- App Preview modal -->
 <div class="preview-overlay" id="previewOverlay" role="dialog" aria-modal="true" aria-label="Khalaf Quran app preview">
